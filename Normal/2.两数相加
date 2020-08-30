@@ -3,7 +3,7 @@
 **/
 
 
-/** 高阶代码 **/
+/** 高阶代码（代码简单，但时间、空间消耗大） **/
 
 /**
  * Definition for singly-linked list.
@@ -45,7 +45,7 @@ public:
 };
 
 
-/** 原始代码 **/
+/** 原始代码（代码冗长，但时间、空间复杂度小） **/
 
 /**
  * Definition for singly-linked list.
