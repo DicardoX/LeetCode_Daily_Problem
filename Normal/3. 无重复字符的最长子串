@@ -1,0 +1,33 @@
+/**
+* 题目见：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+**/
+
+/** 原始版本，使用暴力遍历+哈希，时间复杂度O(n^3), 空间复杂度O(m)**/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> strMap;
+        int index = 0, begin = 0;
+        int maxLen = 0, tmpLen;
+
+        while(index < s.length()){
+            tmpLen = 0;
+            index = begin;
+            while(strMap.find(s[index]) == strMap.end()){
+                tmpLen++;
+                strMap[s[index]] = index;
+                index++;
+                if(index >= s.length()) break;
+            }
+
+            int tmpBegin = begin;
+            begin = strMap[s[index]] + 1;
+            for(int i = tmpBegin; i < index; i++){
+                strMap.erase(s[i]);
+            }
+            maxLen = (tmpLen > maxLen) ? tmpLen : maxLen;
+        }
+        return maxLen;
+    }
+};
