@@ -26,7 +26,6 @@ public:
             tmpRes = p1->val + p2->val + flag;
             p1->val = tmpRes % 10;
             flag = tmpRes / 10;
-
             p1 = p1->next;
             p2 = p2->next;
         }
@@ -43,7 +42,6 @@ public:
             tmpRes = p1->val + flag;
             p1->val = tmpRes % 10;
             flag = tmpRes / 10;
-
         }
 
         /** 若l2没有结束 **/
