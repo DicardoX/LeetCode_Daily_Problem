@@ -1,0 +1,125 @@
+/** 
+* 题目见：https://leetcode-cn.com/problems/add-two-numbers/
+**/
+
+/** 原始代码 **/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* p1 = l1;
+        ListNode* p2 = l2;
+        bool flag = false;
+        int tmpRes;
+
+        /** 并行情况 **/
+        while(p1->next != NULL && p2->next != NULL)
+        {
+            if(!flag) 
+                tmpRes = p1->val + p2->val;
+            else 
+                tmpRes = p1->val + p2->val + 1;
+            if(tmpRes < 10){
+                p1->val = tmpRes;
+                flag = false;
+            }
+            else{
+                p1->val = tmpRes - 10;
+                flag = true;
+            }
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+
+        /** 处理并行情况的最后一个元素 **/
+        tmpRes = p1->val + p2->val;
+        if(flag) tmpRes++;
+        if(tmpRes < 10){
+            p1->val = tmpRes;
+            flag = false;
+        }
+        else{
+            p1->val = tmpRes - 10;
+            flag = true;
+        }      
+
+        /** 若l1没有结束 **/
+        while(p1->next != NULL && flag){
+            p1 = p1->next;
+            p1->val++;
+            if(p1->val < 10)
+                flag = false;
+            else{
+                flag = true;
+                p1->val -= 10;
+            }
+        }
+
+        /** 若l2没有结束 **/
+        while(p2->next != NULL){
+            p2 = p2->next;
+            if(flag){
+                if(p2->val + 1 < 10){
+                    flag = false;
+                    p1->next = new ListNode(p2->val + 1);
+                }
+                else{
+                    flag = true;
+                    p1->next = new ListNode(p2->val + 1 - 10);
+                }
+            }
+            else
+                p1->next = new ListNode(p2->val);
+            p1 = p1->next;
+            p1->next = NULL;  
+        }
+
+        /** 处理最后一位可能的进位情况 **/
+        if(p2->next == NULL && p1->next == NULL && flag){
+            p1->next = new ListNode(1);
+            p1 = p1->next;
+            p1->next = NULL;
+        }
+           
+        return l1;
+    }
+};
+
+
+/** 高阶代码 **/
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode vHead(0), *p = &vHead;
+        int flag = 0;
+        while (l1 || l2 || flag) {
+            int tmp = 0;
+            if (l1 != nullptr) tmp += l1->val;
+            if (l2 != nullptr) tmp += l2->val;
+            tmp += flag;
+            
+            flag = tmp / 10;
+            tmp %= 10;
+            
+            ListNode *next = l1 ? l1 : l2;
+            if (next == nullptr) next = new ListNode(tmp);
+            next->val = tmp;
+            
+            p->next = next;
+            p = p->next;
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
+        }
+        return vHead.next;
+    }
+};
+
