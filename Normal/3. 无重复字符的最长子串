@@ -2,7 +2,7 @@
 * 题目见：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 **/
 
-/** 原始版本，使用优化遍历+哈希，时间复杂度O(n^2*m), 空间复杂度O(m)**/
+/** 原始版本，使用优化遍历+哈希，时间复杂度O(n^3), 空间复杂度O(m)**/
 
 class Solution {
 public:
