@@ -23,7 +23,7 @@ public:
 
             int tmpBegin = begin;
             begin = strMap[s[index]] + 1;
-            for(int i = tmpBegin; i < index; i++){
+            for(int i = tmpBegin; i < index; i++){                                  // 每次刷新哈希表，时间长
                 strMap.erase(s[i]);
             }
             maxLen = (tmpLen > maxLen) ? tmpLen : maxLen;
