@@ -1,0 +1,21 @@
+/**
+* 题目见：https://leetcode-cn.com/problems/predict-the-winner/
+**/
+
+/** 方案一：递归 **/
+
+class Solution {
+public:
+    // 1 for player 1, -1 for player 2
+    int score(vector<int>& nums, int begin, int end, int turn){
+        if(begin == end) return nums[begin] * turn;
+        int score1 = score(nums, begin + 1, end, -turn) + nums[begin] * turn;
+        int score2 = score(nums, begin, end - 1, -turn) + nums[end] * turn;
+        return (turn == 1)? max(score1, score2) : min(score1, score2);
+    }
+
+    bool PredictTheWinner(vector<int>& nums) {
+        return score(nums, 0, nums.size() - 1, 1) >= 0;
+    }
+};
+
