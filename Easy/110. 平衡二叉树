@@ -1,0 +1,38 @@
+/**
+* 题目见：https://leetcode-cn.com/problems/balanced-binary-tree/
+**/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+private:
+    bool flag;
+public:
+    Solution(){flag = true;}
+    int subtreeDepth(TreeNode* node){
+        if(node->right == NULL && node->left == NULL){
+            return 1;
+        }
+        int depth1 = 1, depth2 = 1;
+        if(node->left) depth1 += subtreeDepth(node->left);
+        if(node->right) depth2 += subtreeDepth(node->right);
+        if(depth1 - depth2 > 1 || depth2 - depth1 > 1 || depth1 == 0 || depth2 == 0){
+            flag = false;
+            return -1;                    // 便于提高性能
+        } 
+        return max(depth1, depth2);
+    }
+
+    bool isBalanced(TreeNode* root) {
+        if(root == NULL) return true;
+        subtreeDepth(root);
+        return flag;
+    }
+};
