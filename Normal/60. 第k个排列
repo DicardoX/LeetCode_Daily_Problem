@@ -2,7 +2,7 @@
 * 题目见：https://leetcode-cn.com/problems/permutation-sequence/
 **/
 
-/** 方法一：暴力遍历（利用next_permutation()函数） **/
+/** 方法一：暴力穷举法（利用next_permutation()函数） **/
 
 class Solution {
 public:
