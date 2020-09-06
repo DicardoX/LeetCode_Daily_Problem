@@ -12,9 +12,34 @@
  * };
  */
  
- /** 方法一： **/ 
+ /** 方法一： 中序遍历 + 更改树的连接方式**/ 
+ 
+ class Solution {
+public:
+    TreeNode* increasingBST(TreeNode* root) {
+        TreeNode* resHead = new TreeNode(0);
+        if(root == NULL) return NULL;
+        stack<TreeNode*> myStack;
 
-/** 方法二：先找出中序，再重新构造一棵树 **/
+        TreeNode* cur = root;
+        TreeNode* p = resHead;
+        while(cur != NULL || !myStack.empty()){
+            while(cur != NULL){
+                myStack.push(cur);
+                cur = cur->left;
+            }
+            TreeNode* node = myStack.top();
+            myStack.pop();
+            p->right = node;
+            p->left = NULL;
+            p = p->right;
+            cur = node->right;
+        }
+        return resHead->right;
+    }
+};
+
+/** 方法二：先找出中序，构造新的树 **/
 
 class Solution {
 public:
