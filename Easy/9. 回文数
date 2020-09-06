@@ -4,6 +4,19 @@
 
 /** 方案一：反转一半数字（性能好）**/
 
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0 || (x % 10 == 0 && x != 0)) return false;
+
+        int reversedNum = 0;
+        while(reversedNum < x){                 // 只会反转一半
+            reversedNum = reversedNum * 10 + x % 10;
+            x /= 10;
+        }
+        return (reversedNum == x) || (reversedNum / 10 == x);
+    }
+};
 
 
 /** 方案二：转化成string直接比较（性能差） **/
