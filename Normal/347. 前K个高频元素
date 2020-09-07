@@ -1,0 +1,16 @@
+/**
+* 题目见：https://leetcode-cn.com/problems/top-k-frequent-elements/
+**/
+
+/** 方法一：直接调用pythonic函数（python语言） **/ 
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+
+        return [num for num, _ in Counter(nums).most_common(k)]
+        
