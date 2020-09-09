@@ -6,17 +6,17 @@
 
 class Solution {
 public:
-    void BFS(vector<int>& candidates, vector<vector<int>>& res, vector<int> &num, int index, int curVal, int target){
-        if(curVal == target){
+    void BFS(vector<int>& candidates, vector<vector<int>>& res, vector<int> &num, int index, int target){
+        if(target == 0){
             res.emplace_back(num);
             return;
         }
-        if(curVal + candidates[index] > target || index >= candidates.size()) return;
+        if(candidates[index] > target || index >= candidates.size()) return;
         
         for(int i = index; i < candidates.size(); i++){
-            if(curVal + candidates[i] > target) return;
+            if(candidates[i] > target) return;
             num.emplace_back(candidates[i]);
-            BFS(candidates, res, num, i, curVal + candidates[i], target);
+            BFS(candidates, res, num, i, target - candidates[i]);
             num.pop_back();
         }
     }
@@ -26,7 +26,7 @@ public:
         if(!candidates.size()) return res;
         sort(candidates.begin(), candidates.end());             // 按从小到大排序
         vector<int> num;
-        BFS(candidates, res, num, 0, 0, target);
+        BFS(candidates, res, num, 0, target);
         return res;
     }
 };
