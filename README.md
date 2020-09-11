@@ -2,7 +2,7 @@
 
 ---------------------------
 
-## LeetCode（力扣）部分题库题解
+## LeetCode（力扣）题库（部分）题解
 
 [LeetCode官网](https://leetcode-cn.com)
 
