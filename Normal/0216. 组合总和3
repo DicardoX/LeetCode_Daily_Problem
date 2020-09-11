@@ -2,7 +2,7 @@
 * 题目见：https://leetcode-cn.com/problems/combination-sum-iii/submissions/
 **/
 
-/** 方法二：二进制位运算（时间45.65%，空间99.79%） **/
+/** 方法一：二进制位运算（时间45.65%，空间99.79%） **/
 
 class Solution {
 private:
@@ -32,7 +32,7 @@ public:
     }
 };
 
-/** 方法三：BFS递归（回溯法）(时间45.65%，空间42.77%) **/
+/** 方法二：BFS递归回溯（组合枚举）(时间45.65%，空间42.77%) **/
 
 class Solution {
 private:
