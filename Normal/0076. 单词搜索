@@ -1,0 +1,55 @@
+/**
+* 题目见：https://leetcode-cn.com/problems/word-search/submissions/
+**/
+
+/** 方法二：深度优先搜索（无优化），时间复杂度O(mnk)，空间复杂度O(mn)，时间5.02%，空间5.01% **/
+
+class Solution {  
+private:
+    bool existed;
+    int rowSize, lineSize;
+public:
+    Solution(){existed = false;}
+    void DFS(vector<vector<char>>& board, vector<vector<int>> isVisited, string word, int row, int line, int step) {
+        if(existed) return;                         // 若存在，返回
+        if(step == word.size()){                    // 找到答案，存在
+            existed = true;
+            return;
+        }
+        if(row + 1 < rowSize && word[step] == board[row + 1][line] && !isVisited[row + 1][line]){
+            isVisited[row + 1][line] = 1;
+            DFS(board, isVisited, word, row + 1, line, step + 1);
+            isVisited[row + 1][line] = 0;
+        }
+        if(row - 1 >= 0 && word[step] == board[row - 1][line] && !isVisited[row - 1][line]){
+            isVisited[row - 1][line] = 1;
+            DFS(board, isVisited, word, row - 1, line, step + 1);
+            isVisited[row - 1][line] = 0;
+        }
+        if(line + 1 < lineSize && word[step] == board[row][line + 1] && !isVisited[row][line + 1]){
+            isVisited[row][line + 1] = 1;
+            DFS(board, isVisited, word, row, line + 1, step + 1);
+            isVisited[row][line + 1] = 0;
+        }
+        if(line - 1 >= 0 && word[step] == board[row][line - 1] && !isVisited[row][line - 1]){
+            isVisited[row][line - 1] = 1;
+            DFS(board, isVisited, word, row, line - 1, step + 1);
+            isVisited[row][line - 1] = 0;
+        }
+    }
+
+    bool exist(vector<vector<char>>& board, string word) {
+        rowSize = board.size(), lineSize = board[0].size();
+        vector<vector<int>> isVisited(rowSize, vector<int> (lineSize, 0));
+
+        for(int i = 0; i < rowSize; i++){
+            for(int j = 0; j < lineSize; j++){
+                if(board[i][j] != word[0]) continue;
+                isVisited[i][j] = 1;
+                DFS(board, isVisited, word, i, j, 1);
+                isVisited[i][j] = 0;
+            }
+        }
+        return existed;
+    }
+};
