@@ -2,7 +2,7 @@
 * 题目见：https://leetcode-cn.com/problems/word-search/submissions/
 **/
 
-/** 方法二：深度优先搜索（无优化），时间复杂度O(mnk)，空间复杂度O(mn)，时间5.02%，空间5.01% **/
+/** 方法二：深度优先搜索（无优化），时间复杂度O(mn*3^L)（非常松的上界），空间复杂度O(mn)，时间5.02%，空间5.01% **/
 
 class Solution {  
 private:
