@@ -2,6 +2,46 @@
 * 题目见：https://leetcode-cn.com/problems/word-search/submissions/
 **/
 
+/** 方法一：深度优先搜索（优化，代码简洁），复杂度相同，时间39.52%，空间40.09% **/
+
+class Solution {
+public:
+    bool check(vector<vector<char>>& board, vector<vector<int>>& isVisited, string& word, int row, int line, int step) {
+        if(board[row][line] != word[step]) return false;
+        else if(step == word.size() - 1) return true;
+        isVisited[row][line] = true;
+
+        vector<pair<int, int>> directions{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};                        // 利用数对代表四个方向
+        bool result = false;
+        for(const auto& dir : directions){
+            int newRow = row + dir.first, newLine = line + dir.second;
+            if(newRow >= 0 && newRow < board.size() && newLine >= 0 && newLine < board[0].size()){
+                if(!isVisited[newRow][newLine]){
+                    if(check(board, isVisited, word, newRow, newLine, step + 1)){
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        isVisited[row][line] = false;
+        return result;
+    }
+
+    bool exist(vector<vector<char>>& board, string word) {
+        int rowSize = board.size(), lineSize = board[0].size();
+        vector<vector<int>> isVisited(rowSize, vector<int>(lineSize));
+
+        for(int i = 0; i < rowSize; i++){
+            for(int j = 0; j < lineSize; j++){
+                if(check(board, isVisited, word, i, j, 0)) return true;
+            }
+        }
+        return false;
+    }
+};
+
+
 /** 方法二：深度优先搜索（无优化），时间复杂度O(mn*3^L)（非常松的上界），空间复杂度O(mn)，时间5.02%，空间5.01% **/
 
 class Solution {  
