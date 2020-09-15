@@ -2,7 +2,7 @@
 * 题目见：https://leetcode-cn.com/problems/sudoku-solver/
 **/
 
-/** 方法：递归回溯 **/
+/** 方法：递归回溯，可以考虑使用bitset来压缩优化空间，具体代码见题解 **/
 
 class Solution {
 private:
