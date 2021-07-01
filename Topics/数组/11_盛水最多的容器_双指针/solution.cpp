@@ -1,6 +1,6 @@
 // Link: https://leetcode-cn.com/problems/container-with-most-water/
 
-// Solution: 双指针法。设置左右两个指针，每次向内移动较矮的那个idx。
+// Solution: 双指针法。设置左右两个指针，每次向内移动较矮的那个idx（原因是短板效应）。
 
 class Solution {
 public:
